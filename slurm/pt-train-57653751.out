@@ -1,0 +1,112 @@
+REPO_DIR=/home/rsadve1/PROJECT/pole_transport_receiver_package
+PWD=/home/rsadve1/PROJECT/pole_transport_receiver_package
+SLURM_SUBMIT_DIR=/home/rsadve1/PROJECT/pole_transport_receiver_package
+which python=/home/rsadve1/PROJECT/venvs/bin/python
+Python 3.10.13
+2026-03-11 14:04:53.645441: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2026-03-11 14:04:53.646158: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2026-03-11 14:04:53.715260: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2026-03-11 14:04:53.958042: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2026-03-11 14:05:07.651563: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1929] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 38484 MB memory:  -> device: 0, name: NVIDIA A100-SXM4-40GB, pci bus id: 0000:c1:00.0, compute capability: 8.0
+2026-03-11 14:05:08.273143: I external/local_tsl/tsl/platform/default/subprocess.cc:304] Start cannot spawn child process: No such file or directory
+2026-03-11 14:05:15.030834: I tensorflow/core/util/cuda_solvers.cc:179] Creating GpuSolver handles for stream 0x559872a745a0
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+WARNING:tensorflow:You are casting an input of type complex64 to an incompatible dtype float32.  This will discard the imaginary part and may not be what you intended.
+2026-03-11 14:05:21.674838: I external/local_xla/xla/service/service.cc:168] XLA service 0x1523b5605c40 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+2026-03-11 14:05:21.674905: I external/local_xla/xla/service/service.cc:176]   StreamExecutor device (0): NVIDIA A100-SXM4-40GB, Compute Capability 8.0
+2026-03-11 14:05:21.743633: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:269] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2026-03-11 14:05:21.810213: I external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:454] Loaded cuDNN version 8905
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1773252321.953197 3954710 device_compiler.h:186] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+=== training pole transport policy ===
+out_dir: /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights
+weights_path: /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+steps: 1500
+batch_size: 16
+ebno_db_list: [0, 2, 4, 6, 8, 10]
+[train] step=00025/1500 ebno=+0.00dB loss=1.2894e+08 sym=1.2328e+08 pilot=1.1331e+08
+[train] step=00050/1500 ebno=+2.00dB loss=3.5127e+07 sym=3.3515e+07 pilot=3.2238e+07
+[train] step=00075/1500 ebno=+4.00dB loss=6.9176e+06 sym=6.5530e+06 pilot=7.2918e+06
+[train] step=00100/1500 ebno=+6.00dB loss=2.6685e+07 sym=2.5417e+07 pilot=2.5367e+07
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=00125/1500 ebno=+8.00dB loss=1.5508e+07 sym=1.4685e+07 pilot=1.6463e+07
+[train] step=00150/1500 ebno=+10.00dB loss=1.6894e+07 sym=1.6091e+07 pilot=1.6065e+07
+[train] step=00175/1500 ebno=+0.00dB loss=9.7298e+06 sym=9.2650e+06 pilot=9.2965e+06
+[train] step=00200/1500 ebno=+2.00dB loss=6.4364e+06 sym=6.1250e+06 pilot=6.2279e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=00225/1500 ebno=+4.00dB loss=6.9428e+06 sym=6.5906e+06 pilot=7.0426e+06
+[train] step=00250/1500 ebno=+6.00dB loss=1.5531e+07 sym=1.4797e+07 pilot=1.4685e+07
+[train] step=00275/1500 ebno=+8.00dB loss=1.8402e+07 sym=1.7517e+07 pilot=1.7704e+07
+[train] step=00300/1500 ebno=+10.00dB loss=5.4119e+06 sym=5.1439e+06 pilot=5.3610e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=00325/1500 ebno=+0.00dB loss=2.0083e+07 sym=1.9024e+07 pilot=2.1181e+07
+[train] step=00350/1500 ebno=+2.00dB loss=8.4536e+06 sym=8.0386e+06 pilot=8.2987e+06
+[train] step=00375/1500 ebno=+4.00dB loss=1.6268e+07 sym=1.5438e+07 pilot=1.6598e+07
+[train] step=00400/1500 ebno=+6.00dB loss=4.0672e+06 sym=3.8757e+06 pilot=3.8290e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=00425/1500 ebno=+8.00dB loss=1.7594e+07 sym=1.6679e+07 pilot=1.8301e+07
+[train] step=00450/1500 ebno=+10.00dB loss=1.0119e+07 sym=9.6342e+06 pilot=9.6894e+06
+[train] step=00475/1500 ebno=+0.00dB loss=1.1193e+07 sym=1.0681e+07 pilot=1.0231e+07
+[train] step=00500/1500 ebno=+2.00dB loss=9.9352e+06 sym=9.4026e+06 pilot=1.0652e+07
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=00525/1500 ebno=+4.00dB loss=6.7506e+06 sym=6.4454e+06 pilot=6.1038e+06
+[train] step=00550/1500 ebno=+6.00dB loss=6.7128e+06 sym=6.3952e+06 pilot=6.3513e+06
+[train] step=00575/1500 ebno=+8.00dB loss=4.6714e+06 sym=4.4336e+06 pilot=4.7561e+06
+[train] step=00600/1500 ebno=+10.00dB loss=1.6915e+07 sym=1.6029e+07 pilot=1.7704e+07
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=00625/1500 ebno=+0.00dB loss=1.6064e+07 sym=1.5377e+07 pilot=1.3736e+07
+[train] step=00650/1500 ebno=+2.00dB loss=5.7358e+06 sym=5.4829e+06 pilot=5.0580e+06
+[train] step=00675/1500 ebno=+4.00dB loss=1.3648e+07 sym=1.2941e+07 pilot=1.4144e+07
+[train] step=00700/1500 ebno=+6.00dB loss=3.0891e+06 sym=2.9342e+06 pilot=3.0966e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=00725/1500 ebno=+8.00dB loss=1.1464e+07 sym=1.0910e+07 pilot=1.1081e+07
+[train] step=00750/1500 ebno=+10.00dB loss=6.1475e+06 sym=5.8738e+06 pilot=5.4743e+06
+[train] step=00775/1500 ebno=+0.00dB loss=9.8558e+06 sym=9.3128e+06 pilot=1.0860e+07
+[train] step=00800/1500 ebno=+2.00dB loss=8.9683e+06 sym=8.5958e+06 pilot=7.4493e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=00825/1500 ebno=+4.00dB loss=3.6776e+06 sym=3.5078e+06 pilot=3.3965e+06
+[train] step=00850/1500 ebno=+6.00dB loss=1.2098e+06 sym=1.1509e+06 pilot=1.1779e+06
+[train] step=00875/1500 ebno=+8.00dB loss=5.0160e+06 sym=4.7944e+06 pilot=4.4321e+06
+[train] step=00900/1500 ebno=+10.00dB loss=1.1533e+07 sym=1.0971e+07 pilot=1.1230e+07
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=00925/1500 ebno=+0.00dB loss=2.0379e+06 sym=1.9427e+06 pilot=1.9048e+06
+[train] step=00950/1500 ebno=+2.00dB loss=4.8364e+06 sym=4.5928e+06 pilot=4.8706e+06
+[train] step=00975/1500 ebno=+4.00dB loss=4.4442e+06 sym=4.2397e+06 pilot=4.0910e+06
+[train] step=01000/1500 ebno=+6.00dB loss=7.4090e+06 sym=7.0411e+06 pilot=7.3587e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=01025/1500 ebno=+8.00dB loss=3.4702e+06 sym=3.2812e+06 pilot=3.7803e+06
+[train] step=01050/1500 ebno=+10.00dB loss=8.2553e+06 sym=7.8642e+06 pilot=7.8234e+06
+[train] step=01075/1500 ebno=+0.00dB loss=4.3086e+06 sym=4.1118e+06 pilot=3.9360e+06
+[train] step=01100/1500 ebno=+2.00dB loss=5.4290e+06 sym=5.1607e+06 pilot=5.3663e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=01125/1500 ebno=+4.00dB loss=5.2748e+06 sym=5.0200e+06 pilot=5.0978e+06
+[train] step=01150/1500 ebno=+6.00dB loss=8.4795e+06 sym=8.0897e+06 pilot=7.7961e+06
+[train] step=01175/1500 ebno=+8.00dB loss=5.5202e+06 sym=5.2568e+06 pilot=5.2666e+06
+[train] step=01200/1500 ebno=+10.00dB loss=5.3201e+06 sym=5.0835e+06 pilot=4.7322e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=01225/1500 ebno=+0.00dB loss=1.2176e+06 sym=1.1584e+06 pilot=1.1834e+06
+[train] step=01250/1500 ebno=+2.00dB loss=6.0124e+06 sym=5.7167e+06 pilot=5.9146e+06
+[train] step=01275/1500 ebno=+4.00dB loss=9.6434e+05 sym=9.1589e+05 pilot=9.6906e+05
+[train] step=01300/1500 ebno=+6.00dB loss=3.9542e+06 sym=3.7738e+06 pilot=3.6077e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=01325/1500 ebno=+8.00dB loss=1.7570e+06 sym=1.6689e+06 pilot=1.7607e+06
+[train] step=01350/1500 ebno=+10.00dB loss=2.0757e+06 sym=1.9713e+06 pilot=2.0881e+06
+[train] step=01375/1500 ebno=+0.00dB loss=5.6481e+06 sym=5.3805e+06 pilot=5.3506e+06
+[train] step=01400/1500 ebno=+2.00dB loss=5.1068e+06 sym=4.8646e+06 pilot=4.8443e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+[train] step=01425/1500 ebno=+4.00dB loss=2.1184e+06 sym=2.0189e+06 pilot=1.9913e+06
+[train] step=01450/1500 ebno=+6.00dB loss=3.7563e+06 sym=3.5780e+06 pilot=3.5653e+06
+[train] step=01475/1500 ebno=+8.00dB loss=7.8432e+06 sym=7.4710e+06 pilot=7.4427e+06
+[train] step=01500/1500 ebno=+10.00dB loss=6.0894e+06 sym=5.8018e+06 pilot=5.7526e+06
+[train] checkpoint saved to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
+Training finished. Final weights written to /home/rsadve1/PROJECT/pole_transport_receiver_package/results/pole_transport_weights/pole_policy.weights.h5
