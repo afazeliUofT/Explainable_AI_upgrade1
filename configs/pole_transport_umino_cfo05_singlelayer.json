@@ -1,0 +1,96 @@
+{
+  "seed": 7,
+  "precision": "single",
+  "pusch": {
+    "num_tx": 1,
+    "num_layers": 1,
+    "num_antenna_ports": 1,
+    "tb": {
+      "mcs_index": 11
+    },
+    "resource": {
+      "subcarrier_spacing": 30,
+      "num_prbs": 20
+    },
+    "dmrs": {
+      "config_type": 1,
+      "length": 1,
+      "additional_position": 1,
+      "num_cdm_groups_without_data": 1,
+      "type_a_position": 2
+    },
+    "kbest_k": 8
+  },
+  "channel": {
+    "domain": "freq",
+    "scenario": "UMi",
+    "num_rx_ant": 4,
+    "carrier_frequency_hz": 3800000000.0,
+    "speed_mps": 16.67,
+    "enable_pathloss": false,
+    "enable_shadow_fading": false,
+    "o2i_model": "low",
+    "impairments": {
+      "cfo_normalized": 0.05
+    }
+  },
+  "receivers": {
+    "run_lmmse_ls": true,
+    "run_lmmse_perfect_csi": false,
+    "run_pole_static": true,
+    "run_pole_transport_heuristic": true,
+    "run_pole_transport_learned": true
+  },
+  "pole_transport": {
+    "static": {
+      "M": 12,
+      "rho_min": 0.35,
+      "rho_max": 0.995,
+      "warp": 4.0
+    },
+    "policy": {
+      "mode": "learned",
+      "M": 12,
+      "hidden": 16,
+      "rho_min": 0.85,
+      "rho_max": 0.999,
+      "omega_max": 1.0471975512,
+      "sigma_max": 0.3141592654,
+      "smooth_arc": 0.1570796327,
+      "pilot_stream": 0,
+      "weights_path": "results/pole_transport_weights/pole_policy.weights.h5"
+    },
+    "receiver": {
+      "whitening_enabled": true,
+      "whitening_epsilon": 0.001,
+      "ridge_lambda": 0.001,
+      "local_skip": 1,
+      "lowrank_R": 4,
+      "fallback_enabled": true,
+      "selection": "best"
+    }
+  },
+  "train": {
+    "steps": 1500,
+    "batch_size": 16,
+    "ebno_db_list": [0, 2, 4, 6, 8, 10],
+    "learning_rate": 0.003,
+    "weight_decay": 0.00001,
+    "alpha_pilot": 0.05,
+    "save_every": 100,
+    "log_every": 25
+  },
+  "sim": {
+    "ebno_db_list": [0, 2, 4, 6, 8, 10],
+    "batch_size": 32,
+    "min_block_errors": 120,
+    "max_batches": 400,
+    "stop_mode": "ref",
+    "stop_ref": "lmmse_ls",
+    "ignore_min_error_receivers": [],
+    "progress_every": 25
+  },
+  "tf_function": false,
+  "jit_compile": false,
+  "tf_function_baselines": false
+}

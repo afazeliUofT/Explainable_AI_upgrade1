@@ -1,0 +1,114 @@
+{
+  "seed": 1,
+  "precision": "single",
+  "pusch": {
+    "num_tx": 1,
+    "num_layers": 2,
+    "num_antenna_ports": 2,
+    "tb": {
+      "mcs_index": 11
+    },
+    "resource": {
+      "subcarrier_spacing": 30,
+      "num_prbs": 20
+    },
+
+    "dmrs": {
+      "config_type": 1,
+      "length": 1,
+      "additional_position": 1,
+      "num_cdm_groups_without_data": 2,
+      "type_a_position": 2
+    },
+
+    "kbest_k": 8
+  },
+  "channel": {
+    "domain": "freq",
+    "scenario": "UMi",
+    "num_rx_ant": 4,
+    "carrier_frequency_hz": 3800000000.0,
+    "speed_mps": 8.33,
+    "enable_pathloss": false,
+    "enable_shadow_fading": false,
+    "o2i_model": "low",
+    "impairments": {
+      "cfo_normalized": 0.0
+    }
+  },
+  "receivers": {
+    "run_lmmse_ls": true,
+    "run_lmmse_perfect_csi": true,
+    "run_kbest_ls": false,
+    "run_ours_pilot_only_full": true,
+    "run_ours_dd_full": true,
+    "run_ours_pilot_only_lowrank": true,
+    "run_ours_dd_lowrank": true
+  },
+  "ours": {
+    "reservoir": {
+      "M_f": 8,
+      "M_t": 8,
+      "d_f": 1,
+      "d_t": 1,
+      "pole_policy": "dense_unit",
+      "rho_f_min": 0.3,
+      "rho_f_max": 0.98,
+      "rho_t_min": 0.3,
+      "rho_t_max": 0.98,
+      "pole_warp": 4.0
+    },
+    "dd": {
+      "enabled": true,
+      "alpha_min": 0.9,
+      "Q_max": 64,
+      "temperature": 1.0,
+      "mu": 1.0
+    },
+    "lowrank": {
+      "enabled": true,
+      "R": 16
+    },
+    "whitening": {
+      "enabled": true,
+      "epsilon": 0.001
+    },
+    "ridge": {
+      "lambda_feat": 0.001,
+      "lambda_y": 0.001
+    },
+    "subband": {
+  "enabled": true,
+  "size_sc": 6,
+  "mode": "auto"
+},
+    "pole_adapt": {
+      "enabled": true,
+      "adapt_dim": "ft",
+      "order": 8,
+      "order_f": 8,
+      "order_t": 8,
+      "blend_mode": "map",
+      "prior_var": 0.02,
+      "min_blend": 0.05,
+      "max_blend": 0.95,
+      "blend": 0.2,
+      "pilot_stream": 0,
+      "eps": 1e-06,
+      "max_abs_pole": 0.999
+    }
+  },
+  "sim": {
+    "ebno_db_list": [-2, 0, 2, 4, 6, 8],
+    "batch_size": 32,
+    "min_block_errors": 200,
+    "max_batches": 400,
+    "stop_mode": "all",
+    "stop_ref": "lmmse_ls",
+    "ignore_min_error_receivers": ["lmmse_perfect_csi"],
+    "progress_every": 50
+  },
+  "tf_function": false,
+  "jit_compile": false,
+  "tf_function_baselines": false
+}
