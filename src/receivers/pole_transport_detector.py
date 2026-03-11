@@ -36,6 +36,94 @@ def _try_import_remove_nulled():
             return None
 
 
+
+def _build_sionna_constellation(Constellation, num_bits_per_symbol, precision, cdtype):
+    """Create a Sionna QAM constellation across old/new APIs.
+
+    Older Sionna releases use `dtype=tf.complex*`, while newer releases use
+    `precision="single"|"double"`.
+    """
+    build_attempts = [
+        lambda: Constellation(
+            "qam",
+            num_bits_per_symbol=num_bits_per_symbol,
+            normalize=True,
+            dtype=cdtype,
+        ),
+        lambda: Constellation(
+            "qam",
+            num_bits_per_symbol,
+            normalize=True,
+            dtype=cdtype,
+        ),
+        lambda: Constellation(
+            "qam",
+            num_bits_per_symbol=num_bits_per_symbol,
+            normalize=True,
+            precision=precision,
+        ),
+        lambda: Constellation(
+            "qam",
+            num_bits_per_symbol,
+            normalize=True,
+            precision=precision,
+        ),
+        lambda: Constellation(
+            "qam",
+            num_bits_per_symbol=num_bits_per_symbol,
+            normalize=True,
+        ),
+        lambda: Constellation("qam", num_bits_per_symbol, normalize=True),
+    ]
+    last_err = None
+    for fn in build_attempts:
+        try:
+            return fn()
+        except Exception as err:
+            last_err = err
+    if last_err is not None:
+        raise last_err
+    return None
+
+
+def _build_sionna_demapper(Demapper, constellation, precision, cdtype):
+    """Create a Sionna demapper across old/new APIs.
+
+    Older Sionna releases use `dtype=tf.complex*`, while newer releases use
+    `precision="single"|"double"`.
+    """
+    last_err = None
+    for method in ("maxlog", "app"):
+        build_attempts = [
+            lambda m=method: Demapper(
+                m,
+                constellation=constellation,
+                hard_out=False,
+                dtype=cdtype,
+            ),
+            lambda m=method: Demapper(
+                m,
+                constellation=constellation,
+                hard_out=False,
+                precision=precision,
+            ),
+            lambda m=method: Demapper(
+                m,
+                constellation=constellation,
+                hard_out=False,
+            ),
+        ]
+        for fn in build_attempts:
+            try:
+                return fn()
+            except Exception as err:
+                last_err = err
+    if last_err is not None:
+        raise last_err
+    return None
+
+
+
 def _unit_norm_rows(x: np.ndarray, eps: float = 1e-12) -> np.ndarray:
     nrm = np.sqrt(np.sum(np.abs(x) ** 2, axis=-1, keepdims=True))
     return x / np.maximum(nrm, eps)
@@ -206,37 +294,28 @@ class PoleTransportDetector(tf.keras.layers.Layer):
         self._sionna_points = None
         if (Constellation is not None) and (Demapper is not None):
             try:
-                self._sionna_constellation = Constellation(
-                    "qam", num_bits_per_symbol=self.num_bits_per_symbol, normalize=True
+                self._sionna_constellation = _build_sionna_constellation(
+                    Constellation,
+                    num_bits_per_symbol=self.num_bits_per_symbol,
+                    precision=self.precision,
+                    cdtype=self.cdtype,
                 )
-            except TypeError:
-                try:
-                    self._sionna_constellation = Constellation("qam", self.num_bits_per_symbol, normalize=True)
-                except Exception:
-                    self._sionna_constellation = None
-            if self._sionna_constellation is not None:
                 pts = getattr(self._sionna_constellation, "points", None)
                 if pts is None:
                     pts = getattr(self._sionna_constellation, "_points", None)
                 if pts is not None:
                     self._sionna_points = tf.cast(pts, self.cdtype)
-                try:
-                    self._sionna_demapper = Demapper(
-                        "maxlog",
-                        constellation=self._sionna_constellation,
-                        hard_out=False,
-                        dtype=self.rdtype,
-                    )
-                except TypeError:
-                    try:
-                        self._sionna_demapper = Demapper(
-                            "app",
-                            constellation=self._sionna_constellation,
-                            hard_out=False,
-                            dtype=self.rdtype,
-                        )
-                    except Exception:
-                        self._sionna_demapper = None
+                self._sionna_demapper = _build_sionna_demapper(
+                    Demapper,
+                    constellation=self._sionna_constellation,
+                    precision=self.precision,
+                    cdtype=self.cdtype,
+                )
+            except Exception as err:
+                print(f"[PoleTransportDetector] Falling back to internal max-log demapper: {err}", flush=True)
+                self._sionna_constellation = None
+                self._sionna_demapper = None
+                self._sionna_points = None
 
     # ------------------------------------------------------------------
     # Utility helpers
@@ -512,19 +591,20 @@ class PoleTransportDetector(tf.keras.layers.Layer):
         B = tf.shape(x_hat_d)[0]
         Nd = tf.shape(x_hat_d)[2]
         if self._sionna_demapper is not None:
-            no_eff = tf.cast(sigma2_eff, tf.float32)[:, :, None]
+            y_dem = tf.cast(x_hat_d, self.cdtype)
+            no_eff = tf.cast(sigma2_eff, self.rdtype)[:, :, None]
             no_eff = tf.tile(no_eff, [1, 1, Nd])
             llr_out = None
             try:
-                llr_out = self._sionna_demapper(x_hat_d, no_eff)
+                llr_out = self._sionna_demapper(y_dem, no_eff)
             except TypeError:
                 try:
-                    llr_out = self._sionna_demapper([x_hat_d, no_eff])
+                    llr_out = self._sionna_demapper([y_dem, no_eff])
                 except Exception:
                     llr_out = None
             except Exception:
                 try:
-                    llr_out = self._sionna_demapper([x_hat_d, no_eff])
+                    llr_out = self._sionna_demapper([y_dem, no_eff])
                 except Exception:
                     llr_out = None
             if llr_out is not None:
