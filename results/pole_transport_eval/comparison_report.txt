@@ -1,0 +1,57 @@
+Pole-transport comparison report
+====================================
+
+Receivers:
+  - lmmse_ls
+  - pole_static
+  - pole_transport_heuristic
+  - pole_transport_learned
+
+Eb/N0 = +0.00 dB
+  best BLER: lmmse_ls -> 8.6250e-01
+  lmmse_ls                     BLER=8.6250e-01 BER=3.7303e-02 block_errors=138/160
+  pole_static                  BLER=1.0000e+00 BER=4.1482e-01 block_errors=160/160
+  pole_transport_heuristic     BLER=1.0000e+00 BER=4.0968e-01 block_errors=160/160
+  pole_transport_learned       BLER=1.0000e+00 BER=4.0766e-01 block_errors=160/160
+
+Eb/N0 = +2.00 dB
+  best BLER: lmmse_ls -> 5.1563e-03
+  lmmse_ls                     BLER=5.1563e-03 BER=4.8130e-04 block_errors=66/12800
+  pole_static                  BLER=1.0000e+00 BER=3.9673e-01 block_errors=12800/12800
+  pole_transport_heuristic     BLER=1.0000e+00 BER=3.9415e-01 block_errors=12800/12800
+  pole_transport_learned       BLER=1.0000e+00 BER=3.9279e-01 block_errors=12800/12800
+
+Eb/N0 = +4.00 dB
+  best BLER: lmmse_ls -> 1.0156e-03
+  lmmse_ls                     BLER=1.0156e-03 BER=1.6051e-04 block_errors=13/12800
+  pole_static                  BLER=1.0000e+00 BER=3.9156e-01 block_errors=12800/12800
+  pole_transport_heuristic     BLER=1.0000e+00 BER=3.8928e-01 block_errors=12800/12800
+  pole_transport_learned       BLER=1.0000e+00 BER=3.8726e-01 block_errors=12800/12800
+
+Eb/N0 = +6.00 dB
+  best BLER: lmmse_ls -> 6.2500e-04
+  lmmse_ls                     BLER=6.2500e-04 BER=1.0947e-04 block_errors=8/12800
+  pole_static                  BLER=1.0000e+00 BER=3.8589e-01 block_errors=12800/12800
+  pole_transport_heuristic     BLER=1.0000e+00 BER=3.8434e-01 block_errors=12800/12800
+  pole_transport_learned       BLER=1.0000e+00 BER=3.8179e-01 block_errors=12800/12800
+
+Eb/N0 = +8.00 dB
+  best BLER: lmmse_ls -> 2.3437e-04
+  lmmse_ls                     BLER=2.3437e-04 BER=5.5423e-05 block_errors=3/12800
+  pole_static                  BLER=1.0000e+00 BER=3.8072e-01 block_errors=12800/12800
+  pole_transport_heuristic     BLER=1.0000e+00 BER=3.7942e-01 block_errors=12800/12800
+  pole_transport_learned       BLER=1.0000e+00 BER=3.7733e-01 block_errors=12800/12800
+
+Eb/N0 = +10.00 dB
+  best BLER: lmmse_ls -> 6.2500e-04
+  lmmse_ls                     BLER=6.2500e-04 BER=1.5198e-04 block_errors=8/12800
+  pole_static                  BLER=1.0000e+00 BER=3.7758e-01 block_errors=12800/12800
+  pole_transport_heuristic     BLER=1.0000e+00 BER=3.7657e-01 block_errors=12800/12800
+  pole_transport_learned       BLER=1.0000e+00 BER=3.7425e-01 block_errors=12800/12800
+
+pole_static vs lmmse_ls at BLER=0.1: not enough crossing points
+pole_static vs lmmse_ls at BLER=0.01: not enough crossing points
+pole_transport_heuristic vs lmmse_ls at BLER=0.1: not enough crossing points
+pole_transport_heuristic vs lmmse_ls at BLER=0.01: not enough crossing points
+pole_transport_learned vs lmmse_ls at BLER=0.1: not enough crossing points
+pole_transport_learned vs lmmse_ls at BLER=0.01: not enough crossing points

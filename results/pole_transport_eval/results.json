@@ -1,0 +1,348 @@
+{
+  "config": {
+    "seed": 7,
+    "precision": "single",
+    "pusch": {
+      "num_tx": 1,
+      "num_layers": 1,
+      "num_antenna_ports": 1,
+      "tb": {
+        "mcs_index": 11
+      },
+      "resource": {
+        "subcarrier_spacing": 30,
+        "num_prbs": 20
+      },
+      "dmrs": {
+        "config_type": 1,
+        "length": 1,
+        "additional_position": 1,
+        "num_cdm_groups_without_data": 1,
+        "type_a_position": 2
+      },
+      "kbest_k": 8
+    },
+    "channel": {
+      "domain": "freq",
+      "scenario": "UMi",
+      "num_rx_ant": 4,
+      "carrier_frequency_hz": 3800000000.0,
+      "speed_mps": 16.67,
+      "enable_pathloss": false,
+      "enable_shadow_fading": false,
+      "o2i_model": "low",
+      "impairments": {
+        "cfo_normalized": 0.05
+      }
+    },
+    "receivers": {
+      "run_lmmse_ls": true,
+      "run_lmmse_perfect_csi": false,
+      "run_pole_static": true,
+      "run_pole_transport_heuristic": true,
+      "run_pole_transport_learned": true
+    },
+    "pole_transport": {
+      "static": {
+        "M": 12,
+        "rho_min": 0.35,
+        "rho_max": 0.995,
+        "warp": 4.0
+      },
+      "policy": {
+        "mode": "learned",
+        "M": 12,
+        "hidden": 16,
+        "rho_min": 0.85,
+        "rho_max": 0.999,
+        "omega_max": 1.0471975512,
+        "sigma_max": 0.3141592654,
+        "smooth_arc": 0.1570796327,
+        "pilot_stream": 0,
+        "weights_path": "results/pole_transport_weights/pole_policy.weights.h5"
+      },
+      "receiver": {
+        "whitening_enabled": true,
+        "whitening_epsilon": 0.001,
+        "ridge_lambda": 0.001,
+        "local_skip": 1,
+        "lowrank_R": 4,
+        "fallback_enabled": true,
+        "selection": "best"
+      }
+    },
+    "train": {
+      "steps": 1500,
+      "batch_size": 16,
+      "ebno_db_list": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "learning_rate": 0.003,
+      "weight_decay": 1e-05,
+      "alpha_pilot": 0.05,
+      "save_every": 100,
+      "log_every": 25
+    },
+    "sim": {
+      "ebno_db_list": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10
+      ],
+      "batch_size": 32,
+      "min_block_errors": 120,
+      "max_batches": 400,
+      "stop_mode": "ref",
+      "stop_ref": "lmmse_ls",
+      "ignore_min_error_receivers": [],
+      "progress_every": 25
+    },
+    "tf_function": false,
+    "jit_compile": false,
+    "tf_function_baselines": false
+  },
+  "meta": {
+    "timestamp": "2026-03-11_17-40-49",
+    "host": "ng10304",
+    "tf_function": false,
+    "jit_compile": false
+  },
+  "results": [
+    {
+      "ebno_db": 0.0,
+      "no": 0.7929453253746033,
+      "receivers": {
+        "lmmse_ls": {
+          "ber": 0.037303331163194446,
+          "bler": 0.8625,
+          "n_bits": 737280,
+          "n_bit_errors": 27503,
+          "n_blocks": 160,
+          "n_block_errors": 138
+        },
+        "pole_static": {
+          "ber": 0.41482069227430557,
+          "bler": 1.0,
+          "n_bits": 737280,
+          "n_bit_errors": 305839,
+          "n_blocks": 160,
+          "n_block_errors": 160
+        },
+        "pole_transport_heuristic": {
+          "ber": 0.4096815321180556,
+          "bler": 1.0,
+          "n_bits": 737280,
+          "n_bit_errors": 302050,
+          "n_blocks": 160,
+          "n_block_errors": 160
+        },
+        "pole_transport_learned": {
+          "ber": 0.40766330295138886,
+          "bler": 1.0,
+          "n_bits": 737280,
+          "n_bit_errors": 300562,
+          "n_blocks": 160,
+          "n_block_errors": 160
+        }
+      }
+    },
+    {
+      "ebno_db": 2.0,
+      "no": 0.5003146529197693,
+      "receivers": {
+        "lmmse_ls": {
+          "ber": 0.0004812961154513889,
+          "bler": 0.00515625,
+          "n_bits": 58982400,
+          "n_bit_errors": 28388,
+          "n_blocks": 12800,
+          "n_block_errors": 66
+        },
+        "pole_static": {
+          "ber": 0.396732669406467,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 23400245,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        },
+        "pole_transport_heuristic": {
+          "ber": 0.3941517808702257,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 23248018,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        },
+        "pole_transport_learned": {
+          "ber": 0.3927917310926649,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 23167799,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        }
+      }
+    },
+    {
+      "ebno_db": 4.0,
+      "no": 0.3156771957874298,
+      "receivers": {
+        "lmmse_ls": {
+          "ber": 0.00016050550672743055,
+          "bler": 0.001015625,
+          "n_bits": 58982400,
+          "n_bit_errors": 9467,
+          "n_blocks": 12800,
+          "n_block_errors": 13
+        },
+        "pole_static": {
+          "ber": 0.39156480577256947,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 23095432,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        },
+        "pole_transport_heuristic": {
+          "ber": 0.38928003946940104,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22960671,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        },
+        "pole_transport_learned": {
+          "ber": 0.3872635735405816,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22841735,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        }
+      }
+    },
+    {
+      "ebno_db": 6.0,
+      "no": 0.19917885959148407,
+      "receivers": {
+        "lmmse_ls": {
+          "ber": 0.00010947333441840277,
+          "bler": 0.000625,
+          "n_bits": 58982400,
+          "n_bit_errors": 6457,
+          "n_blocks": 12800,
+          "n_block_errors": 8
+        },
+        "pole_static": {
+          "ber": 0.38589109632703994,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22760783,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        },
+        "pole_transport_heuristic": {
+          "ber": 0.3843384297688802,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22669203,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        },
+        "pole_transport_learned": {
+          "ber": 0.3817873297797309,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22518733,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        }
+      }
+    },
+    {
+      "ebno_db": 8.0,
+      "no": 0.12567336857318878,
+      "receivers": {
+        "lmmse_ls": {
+          "ber": 5.5423312717013886e-05,
+          "bler": 0.000234375,
+          "n_bits": 58982400,
+          "n_bit_errors": 3269,
+          "n_blocks": 12800,
+          "n_block_errors": 3
+        },
+        "pole_static": {
+          "ber": 0.38072002834743923,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22455781,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        },
+        "pole_transport_heuristic": {
+          "ber": 0.3794203186035156,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22379121,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        },
+        "pole_transport_learned": {
+          "ber": 0.3773279486762153,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22255708,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        }
+      }
+    },
+    {
+      "ebno_db": 10.0,
+      "no": 0.07929453253746033,
+      "receivers": {
+        "lmmse_ls": {
+          "ber": 0.0001519775390625,
+          "bler": 0.000625,
+          "n_bits": 58982400,
+          "n_bit_errors": 8964,
+          "n_blocks": 12800,
+          "n_block_errors": 8
+        },
+        "pole_static": {
+          "ber": 0.3775795152452257,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22270546,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        },
+        "pole_transport_heuristic": {
+          "ber": 0.3765653991699219,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22210731,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        },
+        "pole_transport_learned": {
+          "ber": 0.374245351155599,
+          "bler": 1.0,
+          "n_bits": 58982400,
+          "n_bit_errors": 22073889,
+          "n_blocks": 12800,
+          "n_block_errors": 12800
+        }
+      }
+    }
+  ]
+}
